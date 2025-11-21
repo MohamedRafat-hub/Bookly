@@ -11,7 +11,7 @@ class FeaturedListViewItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.circular(16),
-          image: DecorationImage(image: AssetImage('assets/mages/test_image.png'),fit: BoxFit.fill),
+          image: DecorationImage(image: AssetImage('assets/mages/test.png'),fit: BoxFit.fill),
         ),
       ),
     );

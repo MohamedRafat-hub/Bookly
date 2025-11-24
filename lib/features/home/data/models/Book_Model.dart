@@ -1,659 +1,370 @@
-/// kind : "books#volume"
-/// id : "otw9AQAAIAAJ"
-/// etag : "NXXgIEG+ij0"
-/// selfLink : "https://www.googleapis.com/books/v1/volumes/otw9AQAAIAAJ"
-/// volumeInfo : {"title":"Computer Literature Bibliography: 1946-1963","authors":["W. W. Youden"],"publishedDate":"1965","industryIdentifiers":[{"type":"OTHER","identifier":"UCSC:32106012011760"}],"readingModes":{"text":false,"image":true},"pageCount":478,"printType":"BOOK","categories":["Computer science"],"maturityRating":"NOT_MATURE","allowAnonLogging":false,"contentVersion":"0.6.6.0.full.1","panelizationSummary":{"containsEpubBubbles":false,"containsImageBubbles":false},"imageLinks":{"smallThumbnail":"http://books.google.com/books/content?id=otw9AQAAIAAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api","thumbnail":"http://books.google.com/books/content?id=otw9AQAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"},"language":"en","previewLink":"http://books.google.com.eg/books?id=otw9AQAAIAAJ&pg=PA293&dq=programming&hl=&cd=1&source=gbs_api","infoLink":"https://play.google.com/store/books/details?id=otw9AQAAIAAJ&source=gbs_api","canonicalVolumeLink":"https://play.google.com/store/books/details?id=otw9AQAAIAAJ"}
-/// saleInfo : {"country":"EG","saleability":"FREE","isEbook":true,"buyLink":"https://play.google.com/store/books/details?id=otw9AQAAIAAJ&rdid=book-otw9AQAAIAAJ&rdot=1&source=gbs_api"}
-/// accessInfo : {"country":"EG","viewability":"ALL_PAGES","embeddable":true,"publicDomain":true,"textToSpeechPermission":"ALLOWED","epub":{"isAvailable":false,"downloadLink":"http://books.google.com.eg/books/download/Computer_Literature_Bibliography_1946_19.epub?id=otw9AQAAIAAJ&hl=&output=epub&source=gbs_api"},"pdf":{"isAvailable":false},"webReaderLink":"http://play.google.com/books/reader?id=otw9AQAAIAAJ&hl=&source=gbs_api","accessViewStatus":"FULL_PUBLIC_DOMAIN","quoteSharingAllowed":false}
-/// searchInfo : {"textSnippet":"... <b>PROGRAMMING</b> CUTTING COSTS WITH LINEAR <b>PROGRAMMING</b> COMPUTER DESIGN TO FACILITATE LINEAR <b>PROGRAMMING</b> GESTALT <b>PROGRAMMING</b> , A NEW CONCEPT IN AUTOMATIC <b>PROGRAMMING</b> THE PROCEDURE TRANSLATOR , A SYSTEM OF AUTOMATIC <b>PROGRAMMING</b> AUTOMATIC&nbsp;..."}
-
 class BookModel {
-  BookModel({
-      String kind, 
-      String id, 
-      String etag, 
-      String selfLink, 
-      VolumeInfo volumeInfo, 
-      SaleInfo saleInfo, 
-      AccessInfo accessInfo, 
-      SearchInfo searchInfo,}){
-    _kind = kind;
-    _id = id;
-    _etag = etag;
-    _selfLink = selfLink;
-    _volumeInfo = volumeInfo;
-    _saleInfo = saleInfo;
-    _accessInfo = accessInfo;
-    _searchInfo = searchInfo;
-}
+  String? kind;
+  String? id;
+  String? etag;
+  String? selfLink;
+  VolumeInfo? volumeInfo;
+  SaleInfo? saleInfo;
+  AccessInfo? accessInfo;
+  SearchInfo? searchInfo;
 
-  BookModel.fromJson(dynamic json) {
-    _kind = json['kind'];
-    _id = json['id'];
-    _etag = json['etag'];
-    _selfLink = json['selfLink'];
-    _volumeInfo = json['volumeInfo'] != null ? VolumeInfo.fromJson(json['volumeInfo']) : null;
-    _saleInfo = json['saleInfo'] != null ? SaleInfo.fromJson(json['saleInfo']) : null;
-    _accessInfo = json['accessInfo'] != null ? AccessInfo.fromJson(json['accessInfo']) : null;
-    _searchInfo = json['searchInfo'] != null ? SearchInfo.fromJson(json['searchInfo']) : null;
+  BookModel(
+      {this.kind,
+        this.id,
+        this.etag,
+        this.selfLink,
+        this.volumeInfo,
+        this.saleInfo,
+        this.accessInfo,
+        this.searchInfo});
+
+  BookModel.fromJson(Map<String, dynamic> json) {
+    kind = json['kind'];
+    id = json['id'];
+    etag = json['etag'];
+    selfLink = json['selfLink'];
+    volumeInfo = json['volumeInfo'] != null
+        ? new VolumeInfo.fromJson(json['volumeInfo'])
+        : null;
+    saleInfo = json['saleInfo'] != null
+        ? new SaleInfo.fromJson(json['saleInfo'])
+        : null;
+    accessInfo = json['accessInfo'] != null
+        ? new AccessInfo.fromJson(json['accessInfo'])
+        : null;
+    searchInfo = json['searchInfo'] != null
+        ? new SearchInfo.fromJson(json['searchInfo'])
+        : null;
   }
-  String _kind;
-  String _id;
-  String _etag;
-  String _selfLink;
-  VolumeInfo _volumeInfo;
-  SaleInfo _saleInfo;
-  AccessInfo _accessInfo;
-  SearchInfo _searchInfo;
-BookModel copyWith({  String kind,
-  String id,
-  String etag,
-  String selfLink,
-  VolumeInfo volumeInfo,
-  SaleInfo saleInfo,
-  AccessInfo accessInfo,
-  SearchInfo searchInfo,
-}) => BookModel(  kind: kind ?? _kind,
-  id: id ?? _id,
-  etag: etag ?? _etag,
-  selfLink: selfLink ?? _selfLink,
-  volumeInfo: volumeInfo ?? _volumeInfo,
-  saleInfo: saleInfo ?? _saleInfo,
-  accessInfo: accessInfo ?? _accessInfo,
-  searchInfo: searchInfo ?? _searchInfo,
-);
-  String get kind => _kind;
-  String get id => _id;
-  String get etag => _etag;
-  String get selfLink => _selfLink;
-  VolumeInfo get volumeInfo => _volumeInfo;
-  SaleInfo get saleInfo => _saleInfo;
-  AccessInfo get accessInfo => _accessInfo;
-  SearchInfo get searchInfo => _searchInfo;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['kind'] = _kind;
-    map['id'] = _id;
-    map['etag'] = _etag;
-    map['selfLink'] = _selfLink;
-    if (_volumeInfo != null) {
-      map['volumeInfo'] = _volumeInfo.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['kind'] = this.kind;
+    data['id'] = this.id;
+    data['etag'] = this.etag;
+    data['selfLink'] = this.selfLink;
+    if (this.volumeInfo != null) {
+      data['volumeInfo'] = this.volumeInfo!.toJson();
     }
-    if (_saleInfo != null) {
-      map['saleInfo'] = _saleInfo.toJson();
+    if (this.saleInfo != null) {
+      data['saleInfo'] = this.saleInfo!.toJson();
     }
-    if (_accessInfo != null) {
-      map['accessInfo'] = _accessInfo.toJson();
+    if (this.accessInfo != null) {
+      data['accessInfo'] = this.accessInfo!.toJson();
     }
-    if (_searchInfo != null) {
-      map['searchInfo'] = _searchInfo.toJson();
+    if (this.searchInfo != null) {
+      data['searchInfo'] = this.searchInfo!.toJson();
     }
-    return map;
+    return data;
   }
-
 }
-
-/// textSnippet : "... <b>PROGRAMMING</b> CUTTING COSTS WITH LINEAR <b>PROGRAMMING</b> COMPUTER DESIGN TO FACILITATE LINEAR <b>PROGRAMMING</b> GESTALT <b>PROGRAMMING</b> , A NEW CONCEPT IN AUTOMATIC <b>PROGRAMMING</b> THE PROCEDURE TRANSLATOR , A SYSTEM OF AUTOMATIC <b>PROGRAMMING</b> AUTOMATIC&nbsp;..."
-
-class SearchInfo {
-  SearchInfo({
-      String textSnippet,}){
-    _textSnippet = textSnippet;
-}
-
-  SearchInfo.fromJson(dynamic json) {
-    _textSnippet = json['textSnippet'];
-  }
-  String _textSnippet;
-SearchInfo copyWith({  String textSnippet,
-}) => SearchInfo(  textSnippet: textSnippet ?? _textSnippet,
-);
-  String get textSnippet => _textSnippet;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['textSnippet'] = _textSnippet;
-    return map;
-  }
-
-}
-
-/// country : "EG"
-/// viewability : "ALL_PAGES"
-/// embeddable : true
-/// publicDomain : true
-/// textToSpeechPermission : "ALLOWED"
-/// epub : {"isAvailable":false,"downloadLink":"http://books.google.com.eg/books/download/Computer_Literature_Bibliography_1946_19.epub?id=otw9AQAAIAAJ&hl=&output=epub&source=gbs_api"}
-/// pdf : {"isAvailable":false}
-/// webReaderLink : "http://play.google.com/books/reader?id=otw9AQAAIAAJ&hl=&source=gbs_api"
-/// accessViewStatus : "FULL_PUBLIC_DOMAIN"
-/// quoteSharingAllowed : false
-
-class AccessInfo {
-  AccessInfo({
-      String country, 
-      String viewability, 
-      bool embeddable, 
-      bool publicDomain, 
-      String textToSpeechPermission, 
-      Epub epub, 
-      Pdf pdf, 
-      String webReaderLink, 
-      String accessViewStatus, 
-      bool quoteSharingAllowed,}){
-    _country = country;
-    _viewability = viewability;
-    _embeddable = embeddable;
-    _publicDomain = publicDomain;
-    _textToSpeechPermission = textToSpeechPermission;
-    _epub = epub;
-    _pdf = pdf;
-    _webReaderLink = webReaderLink;
-    _accessViewStatus = accessViewStatus;
-    _quoteSharingAllowed = quoteSharingAllowed;
-}
-
-  AccessInfo.fromJson(dynamic json) {
-    _country = json['country'];
-    _viewability = json['viewability'];
-    _embeddable = json['embeddable'];
-    _publicDomain = json['publicDomain'];
-    _textToSpeechPermission = json['textToSpeechPermission'];
-    _epub = json['epub'] != null ? Epub.fromJson(json['epub']) : null;
-    _pdf = json['pdf'] != null ? Pdf.fromJson(json['pdf']) : null;
-    _webReaderLink = json['webReaderLink'];
-    _accessViewStatus = json['accessViewStatus'];
-    _quoteSharingAllowed = json['quoteSharingAllowed'];
-  }
-  String _country;
-  String _viewability;
-  bool _embeddable;
-  bool _publicDomain;
-  String _textToSpeechPermission;
-  Epub _epub;
-  Pdf _pdf;
-  String _webReaderLink;
-  String _accessViewStatus;
-  bool _quoteSharingAllowed;
-AccessInfo copyWith({  String country,
-  String viewability,
-  bool embeddable,
-  bool publicDomain,
-  String textToSpeechPermission,
-  Epub epub,
-  Pdf pdf,
-  String webReaderLink,
-  String accessViewStatus,
-  bool quoteSharingAllowed,
-}) => AccessInfo(  country: country ?? _country,
-  viewability: viewability ?? _viewability,
-  embeddable: embeddable ?? _embeddable,
-  publicDomain: publicDomain ?? _publicDomain,
-  textToSpeechPermission: textToSpeechPermission ?? _textToSpeechPermission,
-  epub: epub ?? _epub,
-  pdf: pdf ?? _pdf,
-  webReaderLink: webReaderLink ?? _webReaderLink,
-  accessViewStatus: accessViewStatus ?? _accessViewStatus,
-  quoteSharingAllowed: quoteSharingAllowed ?? _quoteSharingAllowed,
-);
-  String get country => _country;
-  String get viewability => _viewability;
-  bool get embeddable => _embeddable;
-  bool get publicDomain => _publicDomain;
-  String get textToSpeechPermission => _textToSpeechPermission;
-  Epub get epub => _epub;
-  Pdf get pdf => _pdf;
-  String get webReaderLink => _webReaderLink;
-  String get accessViewStatus => _accessViewStatus;
-  bool get quoteSharingAllowed => _quoteSharingAllowed;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['country'] = _country;
-    map['viewability'] = _viewability;
-    map['embeddable'] = _embeddable;
-    map['publicDomain'] = _publicDomain;
-    map['textToSpeechPermission'] = _textToSpeechPermission;
-    if (_epub != null) {
-      map['epub'] = _epub.toJson();
-    }
-    if (_pdf != null) {
-      map['pdf'] = _pdf.toJson();
-    }
-    map['webReaderLink'] = _webReaderLink;
-    map['accessViewStatus'] = _accessViewStatus;
-    map['quoteSharingAllowed'] = _quoteSharingAllowed;
-    return map;
-  }
-
-}
-
-/// isAvailable : false
-
-class Pdf {
-  Pdf({
-      bool isAvailable,}){
-    _isAvailable = isAvailable;
-}
-
-  Pdf.fromJson(dynamic json) {
-    _isAvailable = json['isAvailable'];
-  }
-  bool _isAvailable;
-Pdf copyWith({  bool isAvailable,
-}) => Pdf(  isAvailable: isAvailable ?? _isAvailable,
-);
-  bool get isAvailable => _isAvailable;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['isAvailable'] = _isAvailable;
-    return map;
-  }
-
-}
-
-/// isAvailable : false
-/// downloadLink : "http://books.google.com.eg/books/download/Computer_Literature_Bibliography_1946_19.epub?id=otw9AQAAIAAJ&hl=&output=epub&source=gbs_api"
-
-class Epub {
-  Epub({
-      bool isAvailable, 
-      String downloadLink,}){
-    _isAvailable = isAvailable;
-    _downloadLink = downloadLink;
-}
-
-  Epub.fromJson(dynamic json) {
-    _isAvailable = json['isAvailable'];
-    _downloadLink = json['downloadLink'];
-  }
-  bool _isAvailable;
-  String _downloadLink;
-Epub copyWith({  bool isAvailable,
-  String downloadLink,
-}) => Epub(  isAvailable: isAvailable ?? _isAvailable,
-  downloadLink: downloadLink ?? _downloadLink,
-);
-  bool get isAvailable => _isAvailable;
-  String get downloadLink => _downloadLink;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['isAvailable'] = _isAvailable;
-    map['downloadLink'] = _downloadLink;
-    return map;
-  }
-
-}
-
-/// country : "EG"
-/// saleability : "FREE"
-/// isEbook : true
-/// buyLink : "https://play.google.com/store/books/details?id=otw9AQAAIAAJ&rdid=book-otw9AQAAIAAJ&rdot=1&source=gbs_api"
-
-class SaleInfo {
-  SaleInfo({
-      String country, 
-      String saleability, 
-      bool isEbook, 
-      String buyLink,}){
-    _country = country;
-    _saleability = saleability;
-    _isEbook = isEbook;
-    _buyLink = buyLink;
-}
-
-  SaleInfo.fromJson(dynamic json) {
-    _country = json['country'];
-    _saleability = json['saleability'];
-    _isEbook = json['isEbook'];
-    _buyLink = json['buyLink'];
-  }
-  String _country;
-  String _saleability;
-  bool _isEbook;
-  String _buyLink;
-SaleInfo copyWith({  String country,
-  String saleability,
-  bool isEbook,
-  String buyLink,
-}) => SaleInfo(  country: country ?? _country,
-  saleability: saleability ?? _saleability,
-  isEbook: isEbook ?? _isEbook,
-  buyLink: buyLink ?? _buyLink,
-);
-  String get country => _country;
-  String get saleability => _saleability;
-  bool get isEbook => _isEbook;
-  String get buyLink => _buyLink;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['country'] = _country;
-    map['saleability'] = _saleability;
-    map['isEbook'] = _isEbook;
-    map['buyLink'] = _buyLink;
-    return map;
-  }
-
-}
-
-/// title : "Computer Literature Bibliography: 1946-1963"
-/// authors : ["W. W. Youden"]
-/// publishedDate : "1965"
-/// industryIdentifiers : [{"type":"OTHER","identifier":"UCSC:32106012011760"}]
-/// readingModes : {"text":false,"image":true}
-/// pageCount : 478
-/// printType : "BOOK"
-/// categories : ["Computer science"]
-/// maturityRating : "NOT_MATURE"
-/// allowAnonLogging : false
-/// contentVersion : "0.6.6.0.full.1"
-/// panelizationSummary : {"containsEpubBubbles":false,"containsImageBubbles":false}
-/// imageLinks : {"smallThumbnail":"http://books.google.com/books/content?id=otw9AQAAIAAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api","thumbnail":"http://books.google.com/books/content?id=otw9AQAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"}
-/// language : "en"
-/// previewLink : "http://books.google.com.eg/books?id=otw9AQAAIAAJ&pg=PA293&dq=programming&hl=&cd=1&source=gbs_api"
-/// infoLink : "https://play.google.com/store/books/details?id=otw9AQAAIAAJ&source=gbs_api"
-/// canonicalVolumeLink : "https://play.google.com/store/books/details?id=otw9AQAAIAAJ"
 
 class VolumeInfo {
-  VolumeInfo({
-      String title, 
-      List<String> authors, 
-      String publishedDate, 
-      List<IndustryIdentifiers> industryIdentifiers, 
-      ReadingModes readingModes, 
-      num pageCount, 
-      String printType, 
-      List<String> categories, 
-      String maturityRating, 
-      bool allowAnonLogging, 
-      String contentVersion, 
-      PanelizationSummary panelizationSummary, 
-      ImageLinks imageLinks, 
-      String language, 
-      String previewLink, 
-      String infoLink, 
-      String canonicalVolumeLink,}){
-    _title = title;
-    _authors = authors;
-    _publishedDate = publishedDate;
-    _industryIdentifiers = industryIdentifiers;
-    _readingModes = readingModes;
-    _pageCount = pageCount;
-    _printType = printType;
-    _categories = categories;
-    _maturityRating = maturityRating;
-    _allowAnonLogging = allowAnonLogging;
-    _contentVersion = contentVersion;
-    _panelizationSummary = panelizationSummary;
-    _imageLinks = imageLinks;
-    _language = language;
-    _previewLink = previewLink;
-    _infoLink = infoLink;
-    _canonicalVolumeLink = canonicalVolumeLink;
-}
+  String? title;
+  List<String>? authors;
+  String? publishedDate;
+  List<IndustryIdentifiers>? industryIdentifiers;
+  ReadingModes? readingModes;
+  int? pageCount;
+  String? printType;
+  List<String>? categories;
+  String? maturityRating;
+  bool? allowAnonLogging;
+  String? contentVersion;
+  PanelizationSummary? panelizationSummary;
+  ImageLinks? imageLinks;
+  String? language;
+  String? previewLink;
+  String? infoLink;
+  String? canonicalVolumeLink;
 
-  VolumeInfo.fromJson(dynamic json) {
-    _title = json['title'];
-    _authors = json['authors'] != null ? json['authors'].cast<String>() : [];
-    _publishedDate = json['publishedDate'];
+  VolumeInfo(
+      {this.title,
+        this.authors,
+        this.publishedDate,
+        this.industryIdentifiers,
+        this.readingModes,
+        this.pageCount,
+        this.printType,
+        this.categories,
+        this.maturityRating,
+        this.allowAnonLogging,
+        this.contentVersion,
+        this.panelizationSummary,
+        this.imageLinks,
+        this.language,
+        this.previewLink,
+        this.infoLink,
+        this.canonicalVolumeLink});
+
+  VolumeInfo.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    authors = json['authors'].cast<String>();
+    publishedDate = json['publishedDate'];
     if (json['industryIdentifiers'] != null) {
-      _industryIdentifiers = [];
+      industryIdentifiers = <IndustryIdentifiers>[];
       json['industryIdentifiers'].forEach((v) {
-        _industryIdentifiers.add(IndustryIdentifiers.fromJson(v));
+        industryIdentifiers!.add(new IndustryIdentifiers.fromJson(v));
       });
     }
-    _readingModes = json['readingModes'] != null ? ReadingModes.fromJson(json['readingModes']) : null;
-    _pageCount = json['pageCount'];
-    _printType = json['printType'];
-    _categories = json['categories'] != null ? json['categories'].cast<String>() : [];
-    _maturityRating = json['maturityRating'];
-    _allowAnonLogging = json['allowAnonLogging'];
-    _contentVersion = json['contentVersion'];
-    _panelizationSummary = json['panelizationSummary'] != null ? PanelizationSummary.fromJson(json['panelizationSummary']) : null;
-    _imageLinks = json['imageLinks'] != null ? ImageLinks.fromJson(json['imageLinks']) : null;
-    _language = json['language'];
-    _previewLink = json['previewLink'];
-    _infoLink = json['infoLink'];
-    _canonicalVolumeLink = json['canonicalVolumeLink'];
+    readingModes = json['readingModes'] != null
+        ? new ReadingModes.fromJson(json['readingModes'])
+        : null;
+    pageCount = json['pageCount'];
+    printType = json['printType'];
+    categories = json['categories'].cast<String>();
+    maturityRating = json['maturityRating'];
+    allowAnonLogging = json['allowAnonLogging'];
+    contentVersion = json['contentVersion'];
+    panelizationSummary = json['panelizationSummary'] != null
+        ? new PanelizationSummary.fromJson(json['panelizationSummary'])
+        : null;
+    imageLinks = json['imageLinks'] != null
+        ? new ImageLinks.fromJson(json['imageLinks'])
+        : null;
+    language = json['language'];
+    previewLink = json['previewLink'];
+    infoLink = json['infoLink'];
+    canonicalVolumeLink = json['canonicalVolumeLink'];
   }
-  String _title;
-  List<String> _authors;
-  String _publishedDate;
-  List<IndustryIdentifiers> _industryIdentifiers;
-  ReadingModes _readingModes;
-  num _pageCount;
-  String _printType;
-  List<String> _categories;
-  String _maturityRating;
-  bool _allowAnonLogging;
-  String _contentVersion;
-  PanelizationSummary _panelizationSummary;
-  ImageLinks _imageLinks;
-  String _language;
-  String _previewLink;
-  String _infoLink;
-  String _canonicalVolumeLink;
-VolumeInfo copyWith({  String title,
-  List<String> authors,
-  String publishedDate,
-  List<IndustryIdentifiers> industryIdentifiers,
-  ReadingModes readingModes,
-  num pageCount,
-  String printType,
-  List<String> categories,
-  String maturityRating,
-  bool allowAnonLogging,
-  String contentVersion,
-  PanelizationSummary panelizationSummary,
-  ImageLinks imageLinks,
-  String language,
-  String previewLink,
-  String infoLink,
-  String canonicalVolumeLink,
-}) => VolumeInfo(  title: title ?? _title,
-  authors: authors ?? _authors,
-  publishedDate: publishedDate ?? _publishedDate,
-  industryIdentifiers: industryIdentifiers ?? _industryIdentifiers,
-  readingModes: readingModes ?? _readingModes,
-  pageCount: pageCount ?? _pageCount,
-  printType: printType ?? _printType,
-  categories: categories ?? _categories,
-  maturityRating: maturityRating ?? _maturityRating,
-  allowAnonLogging: allowAnonLogging ?? _allowAnonLogging,
-  contentVersion: contentVersion ?? _contentVersion,
-  panelizationSummary: panelizationSummary ?? _panelizationSummary,
-  imageLinks: imageLinks ?? _imageLinks,
-  language: language ?? _language,
-  previewLink: previewLink ?? _previewLink,
-  infoLink: infoLink ?? _infoLink,
-  canonicalVolumeLink: canonicalVolumeLink ?? _canonicalVolumeLink,
-);
-  String get title => _title;
-  List<String> get authors => _authors;
-  String get publishedDate => _publishedDate;
-  List<IndustryIdentifiers> get industryIdentifiers => _industryIdentifiers;
-  ReadingModes get readingModes => _readingModes;
-  num get pageCount => _pageCount;
-  String get printType => _printType;
-  List<String> get categories => _categories;
-  String get maturityRating => _maturityRating;
-  bool get allowAnonLogging => _allowAnonLogging;
-  String get contentVersion => _contentVersion;
-  PanelizationSummary get panelizationSummary => _panelizationSummary;
-  ImageLinks get imageLinks => _imageLinks;
-  String get language => _language;
-  String get previewLink => _previewLink;
-  String get infoLink => _infoLink;
-  String get canonicalVolumeLink => _canonicalVolumeLink;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['title'] = _title;
-    map['authors'] = _authors;
-    map['publishedDate'] = _publishedDate;
-    if (_industryIdentifiers != null) {
-      map['industryIdentifiers'] = _industryIdentifiers.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['title'] = this.title;
+    data['authors'] = this.authors;
+    data['publishedDate'] = this.publishedDate;
+    if (this.industryIdentifiers != null) {
+      data['industryIdentifiers'] =
+          this.industryIdentifiers!.map((v) => v.toJson()).toList();
     }
-    if (_readingModes != null) {
-      map['readingModes'] = _readingModes.toJson();
+    if (this.readingModes != null) {
+      data['readingModes'] = this.readingModes!.toJson();
     }
-    map['pageCount'] = _pageCount;
-    map['printType'] = _printType;
-    map['categories'] = _categories;
-    map['maturityRating'] = _maturityRating;
-    map['allowAnonLogging'] = _allowAnonLogging;
-    map['contentVersion'] = _contentVersion;
-    if (_panelizationSummary != null) {
-      map['panelizationSummary'] = _panelizationSummary.toJson();
+    data['pageCount'] = this.pageCount;
+    data['printType'] = this.printType;
+    data['categories'] = this.categories;
+    data['maturityRating'] = this.maturityRating;
+    data['allowAnonLogging'] = this.allowAnonLogging;
+    data['contentVersion'] = this.contentVersion;
+    if (this.panelizationSummary != null) {
+      data['panelizationSummary'] = this.panelizationSummary!.toJson();
     }
-    if (_imageLinks != null) {
-      map['imageLinks'] = _imageLinks.toJson();
+    if (this.imageLinks != null) {
+      data['imageLinks'] = this.imageLinks!.toJson();
     }
-    map['language'] = _language;
-    map['previewLink'] = _previewLink;
-    map['infoLink'] = _infoLink;
-    map['canonicalVolumeLink'] = _canonicalVolumeLink;
-    return map;
+    data['language'] = this.language;
+    data['previewLink'] = this.previewLink;
+    data['infoLink'] = this.infoLink;
+    data['canonicalVolumeLink'] = this.canonicalVolumeLink;
+    return data;
   }
-
 }
-
-/// smallThumbnail : "http://books.google.com/books/content?id=otw9AQAAIAAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
-/// thumbnail : "http://books.google.com/books/content?id=otw9AQAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-
-class ImageLinks {
-  ImageLinks({
-      String smallThumbnail, 
-      String thumbnail,}){
-    _smallThumbnail = smallThumbnail;
-    _thumbnail = thumbnail;
-}
-
-  ImageLinks.fromJson(dynamic json) {
-    _smallThumbnail = json['smallThumbnail'];
-    _thumbnail = json['thumbnail'];
-  }
-  String _smallThumbnail;
-  String _thumbnail;
-ImageLinks copyWith({  String smallThumbnail,
-  String thumbnail,
-}) => ImageLinks(  smallThumbnail: smallThumbnail ?? _smallThumbnail,
-  thumbnail: thumbnail ?? _thumbnail,
-);
-  String get smallThumbnail => _smallThumbnail;
-  String get thumbnail => _thumbnail;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['smallThumbnail'] = _smallThumbnail;
-    map['thumbnail'] = _thumbnail;
-    return map;
-  }
-
-}
-
-/// containsEpubBubbles : false
-/// containsImageBubbles : false
-
-class PanelizationSummary {
-  PanelizationSummary({
-      bool containsEpubBubbles, 
-      bool containsImageBubbles,}){
-    _containsEpubBubbles = containsEpubBubbles;
-    _containsImageBubbles = containsImageBubbles;
-}
-
-  PanelizationSummary.fromJson(dynamic json) {
-    _containsEpubBubbles = json['containsEpubBubbles'];
-    _containsImageBubbles = json['containsImageBubbles'];
-  }
-  bool _containsEpubBubbles;
-  bool _containsImageBubbles;
-PanelizationSummary copyWith({  bool containsEpubBubbles,
-  bool containsImageBubbles,
-}) => PanelizationSummary(  containsEpubBubbles: containsEpubBubbles ?? _containsEpubBubbles,
-  containsImageBubbles: containsImageBubbles ?? _containsImageBubbles,
-);
-  bool get containsEpubBubbles => _containsEpubBubbles;
-  bool get containsImageBubbles => _containsImageBubbles;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['containsEpubBubbles'] = _containsEpubBubbles;
-    map['containsImageBubbles'] = _containsImageBubbles;
-    return map;
-  }
-
-}
-
-/// text : false
-/// image : true
-
-class ReadingModes {
-  ReadingModes({
-      bool text, 
-      bool image,}){
-    _text = text;
-    _image = image;
-}
-
-  ReadingModes.fromJson(dynamic json) {
-    _text = json['text'];
-    _image = json['image'];
-  }
-  bool _text;
-  bool _image;
-ReadingModes copyWith({  bool text,
-  bool image,
-}) => ReadingModes(  text: text ?? _text,
-  image: image ?? _image,
-);
-  bool get text => _text;
-  bool get image => _image;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['text'] = _text;
-    map['image'] = _image;
-    return map;
-  }
-
-}
-
-/// type : "OTHER"
-/// identifier : "UCSC:32106012011760"
 
 class IndustryIdentifiers {
-  IndustryIdentifiers({
-      String type, 
-      String identifier,}){
-    _type = type;
-    _identifier = identifier;
-}
+  String? type;
+  String? identifier;
 
-  IndustryIdentifiers.fromJson(dynamic json) {
-    _type = json['type'];
-    _identifier = json['identifier'];
+  IndustryIdentifiers({this.type, this.identifier});
+
+  IndustryIdentifiers.fromJson(Map<String, dynamic> json) {
+    type = json['type'];
+    identifier = json['identifier'];
   }
-  String _type;
-  String _identifier;
-IndustryIdentifiers copyWith({  String type,
-  String identifier,
-}) => IndustryIdentifiers(  type: type ?? _type,
-  identifier: identifier ?? _identifier,
-);
-  String get type => _type;
-  String get identifier => _identifier;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['type'] = _type;
-    map['identifier'] = _identifier;
-    return map;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = this.type;
+    data['identifier'] = this.identifier;
+    return data;
+  }
+}
+
+class ReadingModes {
+  bool? text;
+  bool? image;
+
+  ReadingModes({this.text, this.image});
+
+  ReadingModes.fromJson(Map<String, dynamic> json) {
+    text = json['text'];
+    image = json['image'];
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['text'] = this.text;
+    data['image'] = this.image;
+    return data;
+  }
+}
+
+class PanelizationSummary {
+  bool? containsEpubBubbles;
+  bool? containsImageBubbles;
+
+  PanelizationSummary({this.containsEpubBubbles, this.containsImageBubbles});
+
+  PanelizationSummary.fromJson(Map<String, dynamic> json) {
+    containsEpubBubbles = json['containsEpubBubbles'];
+    containsImageBubbles = json['containsImageBubbles'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['containsEpubBubbles'] = this.containsEpubBubbles;
+    data['containsImageBubbles'] = this.containsImageBubbles;
+    return data;
+  }
+}
+
+class ImageLinks {
+  String? smallThumbnail;
+  String? thumbnail;
+
+  ImageLinks({this.smallThumbnail, this.thumbnail});
+
+  ImageLinks.fromJson(Map<String, dynamic> json) {
+    smallThumbnail = json['smallThumbnail'];
+    thumbnail = json['thumbnail'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['smallThumbnail'] = this.smallThumbnail;
+    data['thumbnail'] = this.thumbnail;
+    return data;
+  }
+}
+
+class SaleInfo {
+  String? country;
+  String? saleability;
+  bool? isEbook;
+  String? buyLink;
+
+  SaleInfo({this.country, this.saleability, this.isEbook, this.buyLink});
+
+  SaleInfo.fromJson(Map<String, dynamic> json) {
+    country = json['country'];
+    saleability = json['saleability'];
+    isEbook = json['isEbook'];
+    buyLink = json['buyLink'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['country'] = this.country;
+    data['saleability'] = this.saleability;
+    data['isEbook'] = this.isEbook;
+    data['buyLink'] = this.buyLink;
+    return data;
+  }
+}
+
+class AccessInfo {
+  String? country;
+  String? viewability;
+  bool? embeddable;
+  bool? publicDomain;
+  String? textToSpeechPermission;
+  Epub? epub;
+  Pdf? pdf;
+  String? webReaderLink;
+  String? accessViewStatus;
+  bool? quoteSharingAllowed;
+
+  AccessInfo(
+      {this.country,
+        this.viewability,
+        this.embeddable,
+        this.publicDomain,
+        this.textToSpeechPermission,
+        this.epub,
+        this.pdf,
+        this.webReaderLink,
+        this.accessViewStatus,
+        this.quoteSharingAllowed});
+
+  AccessInfo.fromJson(Map<String, dynamic> json) {
+    country = json['country'];
+    viewability = json['viewability'];
+    embeddable = json['embeddable'];
+    publicDomain = json['publicDomain'];
+    textToSpeechPermission = json['textToSpeechPermission'];
+    epub = json['epub'] != null ? new Epub.fromJson(json['epub']) : null;
+    pdf = json['pdf'] != null ? new Pdf.fromJson(json['pdf']) : null;
+    webReaderLink = json['webReaderLink'];
+    accessViewStatus = json['accessViewStatus'];
+    quoteSharingAllowed = json['quoteSharingAllowed'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['country'] = this.country;
+    data['viewability'] = this.viewability;
+    data['embeddable'] = this.embeddable;
+    data['publicDomain'] = this.publicDomain;
+    data['textToSpeechPermission'] = this.textToSpeechPermission;
+    if (this.epub != null) {
+      data['epub'] = this.epub!.toJson();
+    }
+    if (this.pdf != null) {
+      data['pdf'] = this.pdf!.toJson();
+    }
+    data['webReaderLink'] = this.webReaderLink;
+    data['accessViewStatus'] = this.accessViewStatus;
+    data['quoteSharingAllowed'] = this.quoteSharingAllowed;
+    return data;
+  }
+}
+
+class Epub {
+  bool? isAvailable;
+  String? downloadLink;
+
+  Epub({this.isAvailable, this.downloadLink});
+
+  Epub.fromJson(Map<String, dynamic> json) {
+    isAvailable = json['isAvailable'];
+    downloadLink = json['downloadLink'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['isAvailable'] = this.isAvailable;
+    data['downloadLink'] = this.downloadLink;
+    return data;
+  }
+}
+
+class Pdf {
+  bool? isAvailable;
+
+  Pdf({this.isAvailable});
+
+  Pdf.fromJson(Map<String, dynamic> json) {
+    isAvailable = json['isAvailable'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['isAvailable'] = this.isAvailable;
+    return data;
+  }
+}
+
+class SearchInfo {
+  String? textSnippet;
+
+  SearchInfo({this.textSnippet});
+
+  SearchInfo.fromJson(Map<String, dynamic> json) {
+    textSnippet = json['textSnippet'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['textSnippet'] = this.textSnippet;
+    return data;
+  }
 }

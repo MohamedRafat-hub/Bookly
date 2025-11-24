@@ -1,4 +1,5 @@
 import 'package:bookly/constants.dart';
+import 'package:bookly/features/home/presentation/views/book_details_view.dart';
 import 'package:bookly/features/home/presentation/views/home_view.dart';
 import 'package:bookly/features/splash/data/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class Bookly extends StatelessWidget {
     return MaterialApp(
       routes: {
         HomeView.id : (context)=>HomeView(),
+        BookDetailsView.id : (context)=> BookDetailsView(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:bookly/features/home/data/models/Book_Model.dart';
 import 'package:bookly/features/home/data/repos/home_repo.dart';
@@ -13,7 +15,7 @@ class FeaturesBooksCubit extends Cubit<FeaturesBooksState> {
     emit(FeaturesBooksLoading());
     var result  = await homeRepo.fetchFeaturedBooks();
     result.fold((failure){
-      emit(FeaturesBooksError(failure.errorMessage));
+      emit(FeaturesBooksFailure(failure.errorMessage));
     }, (books){
       emit(FeaturesBooksSuccess(books));
     });

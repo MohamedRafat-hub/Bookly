@@ -12,7 +12,7 @@ final class FeaturesBooksSuccess extends FeaturesBooksState {
   FeaturesBooksSuccess(this.books);
 }
 
-final class FeaturesBooksError extends FeaturesBooksState {
+final class FeaturesBooksFailure extends FeaturesBooksState {
   final String errorMessage;
-  FeaturesBooksError(this.errorMessage);
+  FeaturesBooksFailure(this.errorMessage);
 }

@@ -61,13 +61,13 @@ class BookModel {
 
 class VolumeInfo {
   String? title;
-  List<String>? authors;
+  List<dynamic>? authors;
   String? publishedDate;
   List<IndustryIdentifiers>? industryIdentifiers;
   ReadingModes? readingModes;
   int? pageCount;
   String? printType;
-  List<String>? categories;
+  List<dynamic>? categories;
   String? maturityRating;
   bool? allowAnonLogging;
   String? contentVersion;
@@ -99,7 +99,7 @@ class VolumeInfo {
 
   VolumeInfo.fromJson(Map<String, dynamic> json) {
     title = json['title'];
-    authors = json['authors'].cast<String>();
+    authors = json['authors'];
     publishedDate = json['publishedDate'];
     if (json['industryIdentifiers'] != null) {
       industryIdentifiers = <IndustryIdentifiers>[];
@@ -112,7 +112,7 @@ class VolumeInfo {
         : null;
     pageCount = json['pageCount'];
     printType = json['printType'];
-    categories = json['categories'].cast<String>();
+    categories = json['categories'];
     maturityRating = json['maturityRating'];
     allowAnonLogging = json['allowAnonLogging'];
     contentVersion = json['contentVersion'];

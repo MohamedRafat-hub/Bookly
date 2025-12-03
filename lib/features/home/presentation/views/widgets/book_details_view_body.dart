@@ -21,7 +21,9 @@ class BookDetailsViewBody extends StatelessWidget {
               CustomBookDetailsAppBar(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * .32),
-                child: FeaturedListViewItem(),
+                child: FeaturedListViewItem(
+                  imageUrl: '',
+                ),
               ),
               SizedBox(
                 height: 10,
@@ -90,7 +92,9 @@ class BooksSimilarListView extends StatelessWidget {
       child: ListView.builder( scrollDirection: Axis.horizontal,itemBuilder: (context,index){
         return Padding(
           padding: const EdgeInsets.only(left: 10),
-          child: FeaturedListViewItem(),
+          child: FeaturedListViewItem(
+            imageUrl: '',
+          ),
         );
       }),
     );

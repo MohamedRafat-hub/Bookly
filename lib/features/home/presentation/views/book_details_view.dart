@@ -1,24 +1,50 @@
+import 'package:bookly/features/home/data/models/Book_Model.dart';
+import 'package:bookly/features/home/presentation/manager/similar_books/similar_books_cubit.dart';
 import 'package:bookly/features/home/presentation/views/widgets/book_details_view_body.dart';
-import 'package:bookly/features/home/presentation/views/widgets/custom_button.dart';
-import 'package:bookly/features/home/presentation/views/widgets/featured_list_view_item.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'widgets/book_details_app_bar.dart';
-import 'widgets/book_rating.dart';
 
-class BookDetailsView extends StatelessWidget {
+class BookDetailsView extends StatefulWidget {
   const BookDetailsView({super.key});
 
   static const String id = 'BookDetailsView';
 
   @override
+  State<BookDetailsView> createState() => _BookDetailsViewState();
+}
+
+class _BookDetailsViewState extends State<BookDetailsView> {
+  late BookModel bookModel;
+  bool _isLoaded = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_isLoaded) {
+      bookModel =
+      ModalRoute.of(context)!.settings.arguments as BookModel;
+
+      BlocProvider.of<SimilarBooksCubit>(context)
+          .fetchSimilarBooks(
+        bookModel.volumeInfo?.categories?[0] ?? 'Movies',
+      );
+
+      _isLoaded = true;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: BookDetailsViewBody()),
+      body: SafeArea(
+        child: BookDetailsViewBody(bookModel: bookModel,),
+      ),
     );
   }
 }
+
 
 
 

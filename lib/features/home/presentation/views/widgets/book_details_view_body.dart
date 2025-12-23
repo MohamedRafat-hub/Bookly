@@ -1,5 +1,8 @@
+import 'package:bookly/features/home/data/models/Book_Model.dart';
+import 'package:bookly/features/home/presentation/manager/similar_books/similar_books_cubit.dart';
 import 'package:bookly/features/home/presentation/views/widgets/books_actions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../book_details_view.dart';
 import 'book_details_app_bar.dart';
@@ -7,8 +10,8 @@ import 'book_rating.dart';
 import 'featured_list_view_item.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
-  const BookDetailsViewBody({super.key});
-
+  const BookDetailsViewBody({super.key, required this.bookModel});
+  final BookModel bookModel;
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -22,35 +25,35 @@ class BookDetailsViewBody extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * .32),
                 child: FeaturedListViewItem(
-                  imageUrl: '',
+                  imageUrl: bookModel.volumeInfo?.imageLinks?.thumbnail ?? 'assets/images/movie.jpg',
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
               Text(
-                'The Jungle pop',
+                textAlign: TextAlign.center,
+                bookModel.volumeInfo?.title ?? 'Not Available',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 3,
               ),
               Text(
-                'Mohamed Rafat',
+                bookModel.volumeInfo?.authors?[0] ?? 'Not Available',
                 style: TextStyle(
                     color: Colors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic),
               ),
+              // BookRating(),
               SizedBox(
-                height: 3,
+                height: 20,
               ),
-              BookRating(),
-              SizedBox(
-                height: 30,
+              BooksAction(
+                bookModel: bookModel,
               ),
-              BooksAction(),
               SizedBox(
                 height: 20,
               ),
@@ -87,17 +90,32 @@ class BooksSimilarListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * .15,
-      child: ListView.builder( scrollDirection: Axis.horizontal,itemBuilder: (context,index){
-        return Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: FeaturedListViewItem(
-            imageUrl: '',
-          ),
+    return BlocBuilder<SimilarBooksCubit, SimilarBooksState>(
+  builder: (context, state) {
+    if(state is SimilarBooksSuccess)
+      {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * .15,
+          child: ListView.builder(itemCount: state.books.length, scrollDirection: Axis.horizontal,itemBuilder: (context,index){
+            return Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: FeaturedListViewItem(
+                imageUrl: state.books[index].volumeInfo.imageLinks?.thumbnail ?? 'assets/mages/movie.jpg',
+              ),
+            );
+          }),
         );
-      }),
-    );
+      }
+    else if(state is SimilarBooksFailure)
+      {
+        return Center(child: Text(state.errorMessage));
+      }
+    else
+      {
+        return Center(child: CircularProgressIndicator(),);
+      }
+  },
+);
   }
 }
 

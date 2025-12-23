@@ -4,12 +4,12 @@ import 'package:bookly/core/utils/service_locator.dart';
 import 'package:bookly/features/home/data/repos/home_repo_impl.dart';
 import 'package:bookly/features/home/presentation/manager/featured_books_cubit/features_books_cubit.dart';
 import 'package:bookly/features/home/presentation/manager/newest_books_cubit/newest_books_cubit.dart';
+import 'package:bookly/features/home/presentation/manager/similar_books/similar_books_cubit.dart';
 import 'package:bookly/features/home/presentation/views/book_details_view.dart';
 import 'package:bookly/features/home/presentation/views/home_view.dart';
 import 'package:bookly/features/splash/data/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 void main() {
   setUp();
@@ -31,13 +31,17 @@ class Bookly extends StatelessWidget {
         BlocProvider(
           create: (context) => NewestBooksCubit(
             gitIt.get<HomeRepoImpl>(),
-          ),
+          )..fetchNewestBooks(),
         ),
       ],
       child: MaterialApp(
         routes: {
           HomeView.id: (context) => HomeView(),
-          BookDetailsView.id: (context) => BookDetailsView(),
+          BookDetailsView.id: (context) => BlocProvider(
+                create: (context) =>
+                    SimilarBooksCubit(gitIt.get<HomeRepoImpl>()),
+                child: BookDetailsView(),
+              ),
         },
         debugShowCheckedModeBanner: false,
         theme:

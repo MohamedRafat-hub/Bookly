@@ -15,7 +15,7 @@ class BookRating extends StatelessWidget {
         width: 10,
       ),
       Text(
-        '4.8',
+        '4.5',
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       SizedBox(
